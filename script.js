@@ -1,39 +1,27 @@
 function convertToRoman() {
-  const num = parseInt(document.getElementById("numberInput").value);
-  const output = document.getElementById("output");
-
-  if (isNaN(num) || num < 1 || num > 100000) {
-    output.textContent = "Please enter a number between 1 and 100000.";
-    output.style.color = "red";
-    return;
-  }
-
-  const romanMap = [
-    ['M', 1000],
-    ['CM', 900],
-    ['D', 500],
-    ['CD', 400],
-    ['C', 100],
-    ['XC', 90],
-    ['L', 50],
-    ['XL', 40],
-    ['X', 10],
-    ['IX', 9],
-    ['V', 5],
-    ['IV', 4],
-    ['I', 1]
-  ];
-
-  let result = "";
-  let number = num;
-
-  for (let [symbol, value] of romanMap) {
-    while (number >= value) {
-      result += symbol;
-      number -= value;
+    const input = parseInt(document.getElementById('numberInput').value);
+    if (isNaN(input) || input < 0 || input > 100000) {
+        document.getElementById('result').textContent = "Please enter a valid number (0-100000).";
+        return;
     }
-  }
 
-  output.textContent = `Roman numeral: ${result}`;
-  output.style.color = "green";
+    const romanNumerals = [
+        ['M', 1000],
+        ['D', 500],
+        ['C', 100],
+        ['L', 50],
+        ['X', 10],
+        ['V', 5],
+        ['I', 1]
+    ];
+
+    let result = '';
+    for (const [symbol, value] of romanNumerals) {
+        while (input >= value) {
+            result += symbol;
+            input -= value;
+        }
+    }
+
+    document.getElementById('result').textContent = result;
 }
