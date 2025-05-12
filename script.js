@@ -1,5 +1,4 @@
 function convertToRoman(num) {
-    // Define Roman numeral symbols and their values
     const romanSymbols = [
         ['M', 1000],
         ['CM', 900],
@@ -18,7 +17,6 @@ function convertToRoman(num) {
     
     let result = '';
     
-    // Iterate through each symbol
     for (let [symbol, value] of romanSymbols) {
         while (num >= value) {
             result += symbol;
@@ -33,24 +31,23 @@ function convert() {
     const input = document.getElementById('numberInput');
     const output = document.getElementById('output');
     const num = parseInt(input.value);
-    
-    // Input validation
+
     if (isNaN(num)) {
-        output.textContent = 'Please enter a valid number';
+        output.textContent = 'Please enter a valid number.';
         return;
     }
-    
-    if (num < 0 || num > 100000) {
-        output.textContent = 'Please enter a number between 0 and 100000';
+
+    // Traditional Roman numerals range
+    if (num <= 0 || num > 3999) {
+        output.textContent = 'Enter a number between 1 and 3999 (traditional Roman numeral limit).';
         return;
     }
-    
-    // Convert and display result
+
     const romanNumeral = convertToRoman(num);
     output.textContent = romanNumeral;
 }
 
-// Add event listener for Enter key
+// Trigger convert on pressing Enter
 document.getElementById('numberInput').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
         convert();
