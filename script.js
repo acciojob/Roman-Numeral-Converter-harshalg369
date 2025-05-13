@@ -1,9 +1,10 @@
 function convertToRoman() {
-    const number = document.getElementById('numberInput').value;
+    const numberInput = document.getElementById('numberInput').value;
+    const number = parseInt(numberInput, 10);
     const result = document.getElementById('result');
-    
-    if (number < 0 || number > 100000) {
-        result.textContent = "Please enter a number between 0 and 100000";
+
+    if (isNaN(number) || number < 1 || number > 100000) {
+        result.textContent = "Please enter a number between 1 and 100000";
         return;
     }
 
@@ -26,6 +27,11 @@ function convertToRoman() {
     let romanNumber = '';
     let num = number;
 
+    while (num >= 1000) {
+        romanNumber += 'M';
+        num -= 1000;
+    }
+
     for (let i = 0; i < romanNumerals.length; i++) {
         while (num >= romanNumerals[i][1]) {
             romanNumber += romanNumerals[i][0];
@@ -33,10 +39,10 @@ function convertToRoman() {
         }
     }
 
-    result.textContent = romanNumber || 'N/A';
+    result.textContent = romanNumber;
 }
 
-// Add event listener for Enter key
+// Enable Enter key for conversion
 document.getElementById('numberInput').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
         convertToRoman();
