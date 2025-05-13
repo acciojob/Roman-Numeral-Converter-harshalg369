@@ -1,5 +1,13 @@
-function convertToRoman(num) {
-    const romanSymbols = [
+function convertToRoman() {
+    const number = document.getElementById('numberInput').value;
+    const result = document.getElementById('result');
+    
+    if (number < 0 || number > 100000) {
+        result.textContent = "Please enter a number between 0 and 100000";
+        return;
+    }
+
+    const romanNumerals = [
         ['M', 1000],
         ['CM', 900],
         ['D', 500],
@@ -14,42 +22,23 @@ function convertToRoman(num) {
         ['IV', 4],
         ['I', 1]
     ];
-    
-    let result = '';
-    
-    for (let [symbol, value] of romanSymbols) {
-        while (num >= value) {
-            result += symbol;
-            num -= value;
+
+    let romanNumber = '';
+    let num = number;
+
+    for (let i = 0; i < romanNumerals.length; i++) {
+        while (num >= romanNumerals[i][1]) {
+            romanNumber += romanNumerals[i][0];
+            num -= romanNumerals[i][1];
         }
     }
-    
-    return result;
+
+    result.textContent = romanNumber || 'N/A';
 }
 
-function convert() {
-    const input = document.getElementById('numberInput');
-    const output = document.getElementById('output');
-    const num = parseInt(input.value);
-
-    if (isNaN(num)) {
-        output.textContent = 'Please enter a valid number.';
-        return;
-    }
-
-    // Traditional Roman numerals range
-    if (num <= 0 || num > 3999) {
-        output.textContent = 'Enter a number between 1 and 3999 (traditional Roman numeral limit).';
-        return;
-    }
-
-    const romanNumeral = convertToRoman(num);
-    output.textContent = romanNumeral;
-}
-
-// Trigger convert on pressing Enter
+// Add event listener for Enter key
 document.getElementById('numberInput').addEventListener('keypress', function(event) {
     if (event.key === 'Enter') {
-        convert();
+        convertToRoman();
     }
 });

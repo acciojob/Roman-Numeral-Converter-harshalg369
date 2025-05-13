@@ -9,13 +9,13 @@
 <body>
     <div class="container">
         <h1>Roman Numeral Converter</h1>
-        <div class="converter">
+        <div class="input-section">
             <input type="number" id="numberInput" placeholder="Enter a number (0-100000)" min="0" max="100000">
-            <button onclick="convert()">Convert</button>
-            <div class="result">
-                <h2>Result:</h2>
-                <p id="output"></p>
-            </div>
+            <button onclick="convertToRoman()">Convert</button>
+        </div>
+        <div class="result-section">
+            <h2>Result:</h2>
+            <p id="result"></p>
         </div>
     </div>
     <script src="script.js"></script>
